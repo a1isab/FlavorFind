@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   Container,
   Typography,
@@ -22,6 +23,8 @@ import LoadingSkeleton from '../components/LoadingSkeleton';
 
 export default function SearchResults() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { lang } = useParams();
+  const { t } = useTranslation();
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -30,6 +33,7 @@ export default function SearchResults() {
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || null);
   const [selectedArea, setSelectedArea] = useState(searchParams.get('area') || null);
   const [filtersLoading, setFiltersLoading] = useState(true);
+  const lng = lang || 'en';
 
   const query = searchParams.get('q') || '';
 
@@ -72,14 +76,14 @@ export default function SearchResults() {
 
         setMeals(results);
       } catch (err) {
-        setError('Failed to fetch recipes. Please try again.');
+        setError(t('search.error'));
         console.error(err);
       } finally {
         setLoading(false);
       }
     }
     search();
-  }, [query, selectedCategory, selectedArea]);
+  }, [query, selectedCategory, selectedArea, t]);
 
   const handleSearch = (q) => {
     setSelectedCategory(null);
@@ -133,26 +137,26 @@ export default function SearchResults() {
         <Box sx={{ textAlign: 'center', py: 8 }}>
           <SearchOffIcon sx={{ fontSize: 80, color: 'grey.300', mb: 2 }} />
           <Typography variant="h5" color="text.secondary">
-            Search for a recipe or select a filter above
+            {t('search.emptyTitle')}
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ mt: 1 }}>
-            Try typing "chicken", "pasta", or browse by category
+            {t('search.emptyHint')}
           </Typography>
         </Box>
       ) : meals.length === 0 ? (
         <Box sx={{ textAlign: 'center', py: 8 }}>
           <SearchOffIcon sx={{ fontSize: 80, color: 'grey.300', mb: 2 }} />
           <Typography variant="h5" color="text.secondary">
-            No recipes found
+            {t('search.noResults')}
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ mt: 1 }}>
-            Try a different search term or filter
+            {t('search.noResultsHint')}
           </Typography>
         </Box>
       ) : (
         <>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-            {meals.length} recipe{meals.length !== 1 ? 's' : ''} found
+            {t('search.resultsFound', { count: meals.length })}
           </Typography>
           <RecipeGrid meals={meals} />
         </>

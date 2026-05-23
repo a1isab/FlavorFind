@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   Container,
   Typography,
@@ -14,10 +15,13 @@ import LoadingSkeleton from '../components/LoadingSkeleton';
 
 export default function Home() {
   const navigate = useNavigate();
+  const { lang } = useParams();
+  const { t } = useTranslation();
   const [randomMeals, setRandomMeals] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [randomLoading, setRandomLoading] = useState(false);
+  const lng = lang || 'en';
 
   async function fetchRandomMeals(count) {
     const meals = [];
@@ -55,7 +59,7 @@ export default function Home() {
         meal = await getRandomMeal();
         attempts++;
       }
-      if (meal) navigate(`/recipe/${meal.idMeal}`);
+      if (meal) navigate(`/${lng}/recipe/${meal.idMeal}`);
     } finally {
       setRandomLoading(false);
     }
@@ -75,7 +79,7 @@ export default function Home() {
 
       <Container maxWidth="lg" sx={{ py: 6 }}>
         <Typography variant="h4" sx={{ mb: 3, fontWeight: 700 }}>
-          Browse by Category
+          {t('home.browseCategory')}
         </Typography>
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 6 }}>
           {categories.filter((c) => c.strCategory !== 'Pork').slice(0, 12).map((cat) => (
@@ -86,7 +90,7 @@ export default function Home() {
               color="primary"
               variant="outlined"
               size="medium"
-              onClick={() => navigate(`/search?category=${encodeURIComponent(cat.strCategory)}`)}
+              onClick={() => navigate(`/${lng}/search?category=${encodeURIComponent(cat.strCategory)}`)}
               sx={{
                 py: 2,
                 px: 1,
@@ -102,10 +106,10 @@ export default function Home() {
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
           <Typography variant="h4" sx={{ fontWeight: 700 }}>
-            Random Picks
+            {t('home.randomPicks')}
           </Typography>
           <Chip
-            label={randomLoading ? 'Loading...' : 'Show Me Another'}
+            label={randomLoading ? t('home.loading') : t('home.showAnother')}
             clickable
             color="secondary"
             disabled={randomLoading}

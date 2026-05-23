@@ -1,7 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import { Box, Typography, Button, Container } from '@mui/material';
 import { Shuffle as ShuffleIcon } from '@mui/icons-material';
 
 export default function HeroBanner({ onRandom }) {
+  const { t } = useTranslation();
+
   return (
     <Box
       sx={{
@@ -41,9 +44,9 @@ export default function HeroBanner({ onRandom }) {
             lineHeight: 1.1,
           }}
         >
-          Discover Your Next
+          {t('hero.title')}
           <Box component="span" sx={{ display: 'block', color: 'rgba(255,255,255,0.9)' }}>
-            Favorite Dish
+            {t('hero.subtitle')}
           </Box>
         </Typography>
         <Typography
@@ -57,7 +60,7 @@ export default function HeroBanner({ onRandom }) {
             fontSize: { xs: '1rem', md: '1.25rem' },
           }}
         >
-          Search thousands of recipes from around the world. Type an ingredient, a dish name, or get inspired with a random pick.
+          {t('hero.description')}
         </Typography>
         <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
           <Button
@@ -76,7 +79,7 @@ export default function HeroBanner({ onRandom }) {
               el?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            Start Searching
+            {t('hero.searchButton')}
           </Button>
           <Button
             variant="outlined"
@@ -92,7 +95,7 @@ export default function HeroBanner({ onRandom }) {
             startIcon={<ShuffleIcon />}
             onClick={onRandom}
           >
-            Surprise Me
+            {t('hero.randomButton')}
           </Button>
         </Box>
       </Container>

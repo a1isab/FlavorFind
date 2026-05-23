@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
 import { FavoritesProvider } from './context/FavoritesContext';
 import App from './App';
+import './i18n/i18n';
 import './index.css';
 
 createRoot(document.getElementById('root')).render(

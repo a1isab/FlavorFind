@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Box,
   Typography,
@@ -11,6 +12,7 @@ import {
 import { ShoppingBasket as BasketIcon } from '@mui/icons-material';
 
 export default function IngredientChecklist({ meal }) {
+  const { t } = useTranslation();
   const [checked, setChecked] = useState({});
 
   const ingredients = [];
@@ -30,7 +32,7 @@ export default function IngredientChecklist({ meal }) {
     <Box>
       <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
         <BasketIcon color="primary" />
-        Ingredients
+        {t('recipe.ingredients')}
       </Typography>
       <List dense disablePadding>
         {ingredients.map((item, i) => (

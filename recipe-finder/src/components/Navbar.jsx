@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   AppBar,
   Toolbar,
@@ -12,26 +13,29 @@ import {
   useTheme,
 } from '@mui/material';
 import {
-  Menu as MenuIcon,
   Search as SearchIcon,
   Favorite as FavoriteIcon,
   Restaurant as RestaurantIcon,
 } from '@mui/icons-material';
 import { useFavorites } from '../context/FavoritesContext';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { lang } = useParams();
+  const { t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
   const { favorites } = useFavorites();
+  const lng = lang || 'en';
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+      navigate(`/${lng}/search?q=${encodeURIComponent(query.trim())}`);
       setQuery('');
       setSearchOpen(false);
     }
@@ -43,7 +47,7 @@ export default function Navbar() {
         <IconButton
           edge="start"
           color="primary"
-          onClick={() => navigate('/')}
+          onClick={() => navigate(`/${lng}/`)}
           sx={{ mr: 1 }}
         >
           <RestaurantIcon />
@@ -57,9 +61,9 @@ export default function Navbar() {
             color: 'primary.main',
             display: { xs: searchOpen ? 'none' : 'block', md: 'block' },
           }}
-          onClick={() => navigate('/')}
+          onClick={() => navigate(`/${lng}/`)}
         >
-          FlavorFind
+          {t('app.title')}
         </Typography>
 
         <Box sx={{ flexGrow: 1 }} />
@@ -81,7 +85,7 @@ export default function Navbar() {
           >
             <SearchIcon sx={{ color: 'text.secondary', mr: 1 }} />
             <InputBase
-              placeholder="Search recipes..."
+              placeholder={t('nav.searchPlaceholder')}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               sx={{ flex: 1, fontSize: 14 }}
@@ -96,7 +100,12 @@ export default function Navbar() {
           </IconButton>
         )}
 
-        <IconButton color={location.pathname === '/favorites' ? 'primary' : 'default'} onClick={() => navigate('/favorites')}>
+        <LanguageSwitcher />
+
+        <IconButton
+          color={location.pathname.includes('/favorites') ? 'primary' : 'default'}
+          onClick={() => navigate(`/${lng}/favorites`)}
+        >
           <Badge badgeContent={favorites.length} color="secondary">
             <FavoriteIcon />
           </Badge>
@@ -121,7 +130,7 @@ export default function Navbar() {
           >
             <SearchIcon sx={{ color: 'text.secondary', mr: 1 }} />
             <InputBase
-              placeholder="Search recipes..."
+              placeholder={t('nav.searchPlaceholder')}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               sx={{ flex: 1, fontSize: 14 }}

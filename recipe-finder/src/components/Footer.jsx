@@ -1,7 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import { Box, Typography, Container } from '@mui/material';
 import { Restaurant as RestaurantIcon } from '@mui/icons-material';
 
 export default function Footer() {
+  const { t } = useTranslation();
+  const year = new Date().getFullYear();
+
   return (
     <Box
       component="footer"
@@ -25,14 +29,14 @@ export default function Footer() {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <RestaurantIcon />
             <Typography variant="h6" sx={{ fontWeight: 800 }}>
-              FlavorFind
+              {t('app.title')}
             </Typography>
           </Box>
           <Typography variant="body2" sx={{ opacity: 0.8 }}>
-            Powered by TheMealDB — Find your next favorite dish
+            {t('footer.poweredBy')}
           </Typography>
           <Typography variant="body2" sx={{ opacity: 0.6 }}>
-            &copy; {new Date().getFullYear()} FlavorFind
+            {t('footer.copyright', { year })}
           </Typography>
         </Box>
       </Container>

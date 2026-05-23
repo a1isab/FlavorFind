@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Box, Chip, Typography, CircularProgress } from '@mui/material';
 
 export default function SearchFilters({
@@ -9,6 +10,8 @@ export default function SearchFilters({
   onAreaChange,
   loading,
 }) {
+  const { t } = useTranslation();
+
   return (
     <Box sx={{ mb: 4 }}>
       {loading ? (
@@ -19,11 +22,11 @@ export default function SearchFilters({
         <>
           <Box sx={{ mb: 2 }}>
             <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
-              Categories
+              {t('filters.categories')}
             </Typography>
             <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
               <Chip
-                label="All"
+                label={t('filters.all')}
                 size="small"
                 variant={!selectedCategory ? 'filled' : 'outlined'}
                 color={!selectedCategory ? 'primary' : 'default'}
@@ -43,11 +46,11 @@ export default function SearchFilters({
           </Box>
           <Box>
             <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
-              Cuisine (Area)
+              {t('filters.cuisine')}
             </Typography>
             <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
               <Chip
-                label="All"
+                label={t('filters.all')}
                 size="small"
                 variant={!selectedArea ? 'filled' : 'outlined'}
                 color={!selectedArea ? 'secondary' : 'default'}

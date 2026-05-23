@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Box, TextField, InputAdornment } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 
 export default function SearchBar({ initialValue = '', onSearch }) {
+  const { t } = useTranslation();
   const [value, setValue] = useState(initialValue);
 
   const handleSubmit = (e) => {
@@ -21,7 +23,7 @@ export default function SearchBar({ initialValue = '', onSearch }) {
       <TextField
         fullWidth
         variant="outlined"
-        placeholder="Search by recipe name..."
+        placeholder={t('search.placeholder')}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         slotProps={{

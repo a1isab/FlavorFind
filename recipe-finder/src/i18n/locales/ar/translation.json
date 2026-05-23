@@ -1,0 +1,63 @@
+{
+  "app": {
+    "title": "FlavorFind"
+  },
+  "nav": {
+    "searchPlaceholder": "ابحث عن وصفات...",
+    "favorites": "المفضلة"
+  },
+  "hero": {
+    "title": "اكتشف طبقك",
+    "subtitle": "المفضل التالي",
+    "description": "ابحث في آلاف الوصفات من جميع أنحاء العالم. اكتب مكونًا، أو اسم طبق، أو احصل على إلهام باختيار عشوائي.",
+    "searchButton": "ابدأ البحث",
+    "randomButton": "فاجئني"
+  },
+  "home": {
+    "browseCategory": "تصفح حسب الفئة",
+    "randomPicks": "اختيارات عشوائية",
+    "showAnother": "اعرض آخر",
+    "loading": "جارٍ التحميل..."
+  },
+  "search": {
+    "placeholder": "ابحث باسم الوصفة...",
+    "resultsFound": "تم العثور على {{count}} وصفة",
+    "resultsFound_plural": "تم العثور على {{count}} وصفات",
+    "noResults": "لم يتم العثور على وصفات",
+    "noResultsHint": "جرّب مصطلح بحث أو فلتر مختلف",
+    "emptyTitle": "ابحث عن وصفة أو اختر فلترًا أعلاه",
+    "emptyHint": "جرّب كتابة \"دجاج\"، \"معكرونة\"، أو تصفح حسب الفئة",
+    "error": "فشل في جلب الوصفات. حاول مرة أخرى."
+  },
+  "filters": {
+    "categories": "الفئات",
+    "cuisine": "المطبخ (المنطقة)",
+    "all": "الكل"
+  },
+  "recipe": {
+    "ingredients": "المكونات",
+    "instructions": "طريقة التحضير",
+    "watchOnYoutube": "شاهد على يوتيوب",
+    "source": "المصدر",
+    "notFound": "الوصفة غير موجودة",
+    "loadError": "فشل في تحميل الوصفة",
+    "goHome": "العودة إلى الرئيسية"
+  },
+  "favorites": {
+    "title": "المفضلة",
+    "empty": "لا توجد وصفات مفضلة بعد",
+    "emptyHint": "ابدأ الاستكشاف واحفظ الوصفات التي تحبها!",
+    "explore": "استكشف الوصفات",
+    "saved": "{{count}} وصفة محفوظة",
+    "saved_plural": "{{count}} وصفات محفوظة"
+  },
+  "footer": {
+    "poweredBy": "مدعوم من TheMealDB — ابحث عن وجبتك المفضلة التالية",
+    "copyright": "© {{year}} FlavorFind"
+  },
+  "language": {
+    "en": "English",
+    "ar": "العربية",
+    "ru": "Русский"
+  }
+}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   Container,
   Typography,
@@ -7,7 +8,6 @@ import {
   IconButton,
   Button,
   Chip,
-  Divider,
   Paper,
   CircularProgress,
 } from '@mui/material';
@@ -19,17 +19,18 @@ import {
   Language as LanguageIcon,
 } from '@mui/icons-material';
 import { getMealById } from '../api/mealDB';
-import { isMealAllowed } from '../utils/foodFilter';
 import { useFavorites } from '../context/FavoritesContext';
 import IngredientChecklist from '../components/IngredientChecklist';
 
 export default function RecipeDetail() {
-  const { id } = useParams();
+  const { id, lang } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { isFavorite, addFavorite, removeFavorite } = useFavorites();
   const [meal, setMeal] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const lng = lang || 'en';
 
   useEffect(() => {
     async function load() {
@@ -38,19 +39,19 @@ export default function RecipeDetail() {
       try {
         const data = await getMealById(id);
         if (!data) {
-          setError('Recipe not found');
+          setError(t('recipe.notFound'));
         } else {
           setMeal(data);
         }
       } catch (err) {
-        setError('Failed to load recipe');
+        setError(t('recipe.loadError'));
         console.error(err);
       } finally {
         setLoading(false);
       }
     }
     load();
-  }, [id]);
+  }, [id, t]);
 
   if (loading) {
     return (
@@ -64,10 +65,10 @@ export default function RecipeDetail() {
     return (
       <Container maxWidth="md" sx={{ py: 8, textAlign: 'center' }}>
         <Typography variant="h5" color="error" gutterBottom>
-          {error || 'Recipe not found'}
+          {error || t('recipe.notFound')}
         </Typography>
-        <Button variant="contained" onClick={() => navigate('/')}>
-          Go Home
+        <Button variant="contained" onClick={() => navigate(`/${lng}/`)}>
+          {t('recipe.goHome')}
         </Button>
       </Container>
     );
@@ -184,7 +185,7 @@ export default function RecipeDetail() {
                   rel="noopener"
                   color="error"
                 >
-                  Watch on YouTube
+                  {t('recipe.watchOnYoutube')}
                 </Button>
               )}
               {meal.strSource && (
@@ -195,7 +196,7 @@ export default function RecipeDetail() {
                   target="_blank"
                   rel="noopener"
                 >
-                  Source
+                  {t('recipe.source')}
                 </Button>
               )}
             </Box>
@@ -203,7 +204,7 @@ export default function RecipeDetail() {
 
           <Box>
             <Typography variant="h5" sx={{ mb: 2, fontWeight: 700 }}>
-              Instructions
+              {t('recipe.instructions')}
             </Typography>
             <Paper
               sx={{

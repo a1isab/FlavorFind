@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   Card,
   CardMedia,
@@ -17,7 +17,9 @@ import { useFavorites } from '../context/FavoritesContext';
 
 export default function RecipeCard({ meal }) {
   const navigate = useNavigate();
+  const { lang } = useParams();
   const { isFavorite, addFavorite, removeFavorite } = useFavorites();
+  const lng = lang || 'en';
   const fav = isFavorite(meal.idMeal);
 
   return (
@@ -29,7 +31,7 @@ export default function RecipeCard({ meal }) {
         flexDirection: 'column',
         height: '100%',
       }}
-      onClick={() => navigate(`/recipe/${meal.idMeal}`)}
+      onClick={() => navigate(`/${lng}/recipe/${meal.idMeal}`)}
     >
       <CardMedia
         component="img"

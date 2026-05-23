@@ -1,0 +1,63 @@
+{
+  "app": {
+    "title": "FlavorFind"
+  },
+  "nav": {
+    "searchPlaceholder": "Search recipes...",
+    "favorites": "Favorites"
+  },
+  "hero": {
+    "title": "Discover Your Next",
+    "subtitle": "Favorite Dish",
+    "description": "Search thousands of recipes from around the world. Type an ingredient, a dish name, or get inspired with a random pick.",
+    "searchButton": "Start Searching",
+    "randomButton": "Surprise Me"
+  },
+  "home": {
+    "browseCategory": "Browse by Category",
+    "randomPicks": "Random Picks",
+    "showAnother": "Show Me Another",
+    "loading": "Loading..."
+  },
+  "search": {
+    "placeholder": "Search by recipe name...",
+    "resultsFound": "{{count}} recipe found",
+    "resultsFound_plural": "{{count}} recipes found",
+    "noResults": "No recipes found",
+    "noResultsHint": "Try a different search term or filter",
+    "emptyTitle": "Search for a recipe or select a filter above",
+    "emptyHint": "Try typing \"chicken\", \"pasta\", or browse by category",
+    "error": "Failed to fetch recipes. Please try again."
+  },
+  "filters": {
+    "categories": "Categories",
+    "cuisine": "Cuisine (Area)",
+    "all": "All"
+  },
+  "recipe": {
+    "ingredients": "Ingredients",
+    "instructions": "Instructions",
+    "watchOnYoutube": "Watch on YouTube",
+    "source": "Source",
+    "notFound": "Recipe not found",
+    "loadError": "Failed to load recipe",
+    "goHome": "Go Home"
+  },
+  "favorites": {
+    "title": "Your Favorites",
+    "empty": "No favorites yet",
+    "emptyHint": "Start exploring and save the recipes you love!",
+    "explore": "Explore Recipes",
+    "saved": "{{count}} saved recipe",
+    "saved_plural": "{{count}} saved recipes"
+  },
+  "footer": {
+    "poweredBy": "Powered by TheMealDB — Find your next favorite dish",
+    "copyright": "© {{year}} FlavorFind"
+  },
+  "language": {
+    "en": "English",
+    "ar": "العربية",
+    "ru": "Русский"
+  }
+}
