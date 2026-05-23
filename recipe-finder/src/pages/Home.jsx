@@ -78,7 +78,7 @@ export default function Home() {
           Browse by Category
         </Typography>
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 6 }}>
-          {categories.slice(0, 12).map((cat) => (
+          {categories.filter((c) => c.strCategory !== 'Pork').slice(0, 12).map((cat) => (
             <Chip
               key={cat.idCategory}
               label={cat.strCategory}

@@ -29,7 +29,7 @@ export default function SearchFilters({
                 color={!selectedCategory ? 'primary' : 'default'}
                 onClick={() => onCategoryChange(null)}
               />
-              {categories.map((cat) => (
+              {categories.filter((c) => c.strCategory !== 'Pork').map((cat) => (
                 <Chip
                   key={cat.strCategory}
                   label={cat.strCategory}
