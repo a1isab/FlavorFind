@@ -19,6 +19,7 @@ import {
   Language as LanguageIcon,
 } from '@mui/icons-material';
 import { getMealById } from '../api/mealDB';
+import { isMealAllowed } from '../utils/foodFilter';
 import { useFavorites } from '../context/FavoritesContext';
 import IngredientChecklist from '../components/IngredientChecklist';
 

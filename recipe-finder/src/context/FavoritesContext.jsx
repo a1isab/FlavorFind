@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { isMealAllowed } from '../utils/foodFilter';
 
 const FavoritesContext = createContext();
 
@@ -6,7 +7,8 @@ export function FavoritesProvider({ children }) {
   const [favorites, setFavorites] = useState(() => {
     try {
       const saved = localStorage.getItem('recipe-favorites');
-      return saved ? JSON.parse(saved) : [];
+      const parsed = saved ? JSON.parse(saved) : [];
+      return parsed.filter(isMealAllowed);
     } catch {
       return [];
     }
@@ -17,6 +19,7 @@ export function FavoritesProvider({ children }) {
   }, [favorites]);
 
   const addFavorite = useCallback((meal) => {
+    if (!isMealAllowed(meal)) return;
     setFavorites((prev) => {
       if (prev.some((f) => f.idMeal === meal.idMeal)) return prev;
       return [meal, ...prev];

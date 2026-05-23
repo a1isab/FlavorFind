@@ -19,15 +19,24 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [randomLoading, setRandomLoading] = useState(false);
 
+  async function fetchRandomMeals(count) {
+    const meals = [];
+    let attempts = 0;
+    while (meals.length < count && attempts < count * 5) {
+      const meal = await getRandomMeal();
+      if (meal) meals.push(meal);
+      attempts++;
+    }
+    return meals;
+  }
+
   useEffect(() => {
     async function load() {
       try {
         const [cats] = await Promise.all([getCategories()]);
         setCategories(cats);
-        const meals = await Promise.all(
-          Array.from({ length: 4 }).map(() => getRandomMeal())
-        );
-        setRandomMeals(meals.filter(Boolean));
+        const meals = await fetchRandomMeals(4);
+        setRandomMeals(meals);
       } catch (err) {
         console.error('Failed to load home data:', err);
       } finally {
@@ -40,7 +49,12 @@ export default function Home() {
   const handleRandom = async () => {
     setRandomLoading(true);
     try {
-      const meal = await getRandomMeal();
+      let attempts = 0;
+      let meal = null;
+      while (!meal && attempts < 5) {
+        meal = await getRandomMeal();
+        attempts++;
+      }
       if (meal) navigate(`/recipe/${meal.idMeal}`);
     } finally {
       setRandomLoading(false);
